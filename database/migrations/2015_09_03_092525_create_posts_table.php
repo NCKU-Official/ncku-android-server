@@ -20,6 +20,8 @@ class CreatePostsTable extends Migration
             $table->string('user_name');
             $table->string('user_email');
             $table->string('user_phone');
+            $table->string('replier');
+            $table->string('reply_content');
             $table->timestamps();
         });
     }
