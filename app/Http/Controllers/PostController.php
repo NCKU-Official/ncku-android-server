@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreatePostRequest;
 
 use App\Post;
+use App\Attachment;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use Storage;
+use Webpatser\Uuid\Uuid;
 
 class PostController extends Controller
 {
@@ -40,8 +44,31 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        $input = $request->all();
-        $post = Post::create($input);
+        // save post
+        $post = Post::create($request->all());
+
+        // if have attachment, create the attachment record
+        if($request->hasFile('attachment')) {
+            // generate filename based on UUID
+            $filename = Uuid::generate();
+
+            // store the file
+            Storage::put(
+                'attachments/'.$filename,
+                file_get_contents($request->file('attachment')->getRealPath())
+            );
+
+            // attachment record
+            $attachment = new Attachment;
+            $attachment->post_id = $post->id;
+            $attachment->original_filename =
+                $request->file('attachment')->getClientOriginalName();
+            $attachment->filename = $filename . '.' .
+                $request->file('attachment')->getClientOriginalExtension();
+            $attachment->mime =
+                $request->file('attachment')->getMimeType();
+            $attachment->save();
+        }
 
         return redirect('posts');
     }

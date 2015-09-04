@@ -12,11 +12,11 @@ class CreateAttachmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('attachment', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('post_id')->index();
+            $table->string('original_filename');
             $table->string('filename');
-            $table->string('path');
             $table->string('mime');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateAttachmentTable extends Migration
      */
     public function down()
     {
-        Schema::drop('attachment');
+        Schema::drop('attachments');
     }
 }
