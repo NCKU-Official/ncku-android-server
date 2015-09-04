@@ -27,8 +27,6 @@ class CreatePostRequest extends Request
             'content' => 'required',
             'location' => 'required',
             'user_name' => 'required',
-            'user_email' => 'optional',
-            'user_phone' => 'optional'
         ];
     }
 }
