@@ -6,5 +6,10 @@
         <p>{{ $post->content }}</p>
         <p>{{ $post->location }}</p>
         <p>---</p>
+        @foreach ($post->attachments as $attachment)
+            {!! Html::image("attachments/$attachment->filename",
+                '',
+                array('height' => '300px')) !!}
+        @endforeach
     </div>
 @endforeach

@@ -15,4 +15,8 @@ class Post extends Model
         'user_phone',
         'user_email'
     ];
+    public function attachments()
+    {
+        return $this->hasMany('App\Attachment');
+    }
 }
