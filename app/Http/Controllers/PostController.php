@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+
 use App\Http\Requests\CreatePostRequest;
 
 use App\Post;
@@ -62,20 +64,24 @@ class PostController extends Controller
         if($request->hasFile('attachment')) {
             // generate filename based on UUID
             $filename = Uuid::generate();
+            $extension = $request->file('attachment')
+                ->getClientOriginalExtension();
+            $fullfilename = $filename . '.' . $extension;
 
             // store the file
-            Storage::put(
-                'attachments/'.$filename,
-                file_get_contents($request->file('attachment')->getRealPath())
-            );
+            Image::make($request->file('attachment')->getRealPath())
+                ->resize(null, 640, function($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->save(public_path() . '/attachments/' . $fullfilename);
 
             // attachment record
             $attachment = new Attachment;
             $attachment->post_id = $post->id;
             $attachment->original_filename =
                 $request->file('attachment')->getClientOriginalName();
-            $attachment->filename = $filename . '.' .
-                $request->file('attachment')->getClientOriginalExtension();
+            $attachment->filename = $fullfilename;
             $attachment->mime =
                 $request->file('attachment')->getMimeType();
             $attachment->save();
