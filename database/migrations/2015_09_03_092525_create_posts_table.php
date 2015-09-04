@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('content');
             $table->string('location');
-            $table->string('category_id')->index();
+            $table->bigInteger('category_id')->index();
             $table->string('user_name');
             $table->string('user_email');
             $table->string('user_phone');

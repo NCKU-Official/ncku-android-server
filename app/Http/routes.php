@@ -1,5 +1,7 @@
 <?php
 
+use App\Post;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,8 +13,14 @@
 |
 */
 
-Route::resource('posts', 'PostController');
+Route::get('category/{category_id}/posts/create', 'PostController@create');
+Route::get('category/{category_id}/posts', 'PostController@index');
+Route::post('category/{category_id}/posts/store', 'PostController@store');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'as' => 'category/all/posts', 'uses' => 'PostController@index'
+]);
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });

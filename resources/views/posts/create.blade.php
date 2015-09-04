@@ -1,6 +1,6 @@
 {!! Form::open(
 	array(
-		'action' => 'PostController@store',
+		'action' => array('PostController@store', $category_id),
 		'files' => true)
 	)
 !!}

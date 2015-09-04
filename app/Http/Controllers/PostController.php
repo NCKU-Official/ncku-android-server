@@ -20,9 +20,17 @@ class PostController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index($category_id = null)
     {
-        $posts = Post::all();
+        // if a category was passed, use that
+        // if no category, get all posts
+
+        // if ($category_id) {
+        //     $posts = Post::where('category_id', $category_id);
+        // }
+        // else {
+            $posts = Post::all();
+        // }
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -31,21 +39,24 @@ class PostController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create($category_id)
     {
-        return view('posts.create');
+        return view('posts.create', ['category_id' => $category_id]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  CreatePostRequest $request
      * @return Response
      */
-    public function store(CreatePostRequest $request)
+    public function store(CreatePostRequest $request, $category_id)
     {
         // save post
-        $post = Post::create($request->all());
+        $post = new Post;
+        $post->fill($request->all());
+        $post->category_id = $category_id;
+        $post->save();
 
         // if have attachment, create the attachment record
         if($request->hasFile('attachment')) {
@@ -70,7 +81,7 @@ class PostController extends Controller
             $attachment->save();
         }
 
-        return redirect('posts');
+        return redirect('category/'.$category_id.'/posts');
     }
 
     /**
