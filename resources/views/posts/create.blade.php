@@ -88,7 +88,8 @@
 					    {!! Form::file('attachment') !!}
 	                    <p class="help-block">附帶圖檔能讓負責單位更容易了解情況</p>
 					</div>
-					{!! Form::submit('確定通報') !!}
+					{!! Form::submit('確定通報',array(
+                        'class' => 'btn btn-block btn-primary')) !!}
 					{!! Form::close() !!}
 				</div><!-- /.box-body -->
 			</div><!-- /.box -->
