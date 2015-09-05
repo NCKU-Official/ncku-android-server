@@ -73,6 +73,7 @@
                             <!-- </div> -->
                         </div><!-- /.box -->
                     @endforeach
+                    {!! $posts->render() !!}
                 </section><!-- /.content -->
             </div><!-- /.content-wrapper -->
 

@@ -31,7 +31,7 @@ class PostController extends Controller
         //     $posts = Post::where('category_id', $category_id);
         // }
         // else {
-            $posts = Post::orderBy('created_at', 'DESC')->get();
+            $posts = Post::orderBy('created_at', 'DESC')->paginate(15);
         // }
         return view('posts.index', ['posts' => $posts]);
     }
