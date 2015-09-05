@@ -19,8 +19,6 @@
         <link href="{{ asset('/dist/css/skins/_all-skins.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- iCheck -->
         <link href="{{ asset('/plugins/iCheck/flat/blue.css') }}" rel="stylesheet" type="text/css" />
-        <!-- Morris chart -->
-        <link href="{{ asset('/plugins/morris/morris.css') }}" rel="stylesheet" type="text/css" />
         <!-- jvectormap -->
         <link href="{{ asset('/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet" type="text/css" />
         <!-- Date Picker -->
@@ -47,7 +45,7 @@
                                 <div class='user-block' style='margin-left: -32px;'>
                                     <span class='username'><a href="#"></a>{{ $post->user_name }}</span>
                                     <span class='description'>{{ $post->location }}</span>
-                                    <span class='description'>Shared publicly - 7:30 PM Today</span>
+                                    <span class='description time'>{{ $post->created_at }}</span>
                                 </div><!-- /.user-block -->
                             </div><!-- /.box-header -->
                             <div class='box-body'>
@@ -81,7 +79,7 @@
               <p>Copyright &copy; 2015 國立成功大學，701 臺南市東區大學路1號　Tel: (886-6) 275-7575</p>
             </footer>
         </div>
-                <!-- jQuery 2.1.4 -->
+        <!-- jQuery 2.1.4 -->
         <script src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
         <!-- jQuery UI 1.11.4 -->
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -119,5 +117,12 @@
         <script src="{{ asset('/dist/js/pages/dashboard.js') }}" type="text/javascript"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="{{ asset('/dist/js/demo.js') }}" type="text/javascript"></script>
+        <script type="text/javascript">
+            $('.time').each(function(i, e) {
+                e_time = $(e).text();
+                convert_time = moment(e_time).calendar();
+                $(e).text(convert_time);
+            });
+        </script>
     </body>
 </html>
