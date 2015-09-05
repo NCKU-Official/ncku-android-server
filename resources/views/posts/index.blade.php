@@ -44,7 +44,7 @@
                         <!-- Box Comment -->
                         <div class="box box-widget">
                             <div class='box-header with-border'>
-                                <div class='user-block'>
+                                <div class='user-block' style='margin-left: -32px;'>
                                     <span class='username'><a href="#"></a>{{ $post->user_name }}</span>
                                     <span class='description'>{{ $post->location }}</span>
                                     <span class='description'>Shared publicly - 7:30 PM Today</span>
@@ -58,7 +58,7 @@
                                         'alt' => '{{ $post->location }}'
                                     )) !!}
                                 @endforeach
-                                <p>{{ $post->content }}</p>
+                                <p style='margin-left: 12px;'>{{ $post->content }}</p>
                             </div><!-- /.box-body -->
                             <!-- <div class='box-footer box-comments'> -->
                                 <!-- <div class='box-comment'>
