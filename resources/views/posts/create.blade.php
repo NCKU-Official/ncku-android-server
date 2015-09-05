@@ -84,7 +84,7 @@
 						) !!}
 					</div>
 					<div class="form-group">
-	                    <label for="exampleInputFile">圖片附檔</label>
+	                    <label for="attachment">圖片附檔</label>
 					    {!! Form::file('attachment') !!}
 	                    <p class="help-block">附帶圖檔能讓負責單位更容易了解情況</p>
 					</div>
