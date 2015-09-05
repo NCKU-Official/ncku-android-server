@@ -13,9 +13,13 @@ use App\Post;
 |
 */
 
+// post
 Route::get('category/{category_id}/posts/create', 'PostController@create');
 Route::get('category/{category_id}/posts', 'PostController@index');
 Route::post('category/{category_id}/posts/store', 'PostController@store');
+
+// category
+Route::get('category', 'CategoryController@index');
 
 Route::get('/', [
     'as' => 'category/all/posts', 'uses' => 'PostController@index'
