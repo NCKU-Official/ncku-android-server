@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Database\Eloquent\Collection;
 
 use App\Category;
 
@@ -19,13 +20,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories  = Category::orderBy('order')->get()->toArray();
+        $categories = Category::orderBy('order')->get()->toArray();
+
+        $index = new Collection;
+        $index['data'] = $categories;
+
         foreach ($categories as &$c) {
             $c['action'] = array(
                 'create' => Config::get('app.url').'/category/'.$c['id'].'/posts/create',
                 'view' => Config::get('app.url').'/category/'.$c['id'].'/posts');
         }
-        return response()->json($categories);
+        return response()->json($index);
     }
 
     /**
