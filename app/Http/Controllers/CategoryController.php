@@ -21,15 +21,14 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::orderBy('order')->get()->toArray();
-
-        $index = new Collection;
-        $index['data'] = $categories;
-
         foreach ($categories as &$c) {
             $c['action'] = array(
                 'create' => Config::get('app.url').'/category/'.$c['id'].'/posts/create',
                 'view' => Config::get('app.url').'/category/'.$c['id'].'/posts');
         }
+
+        $index = new Collection;
+        $index['data'] = $categories;
         return response()->json($index);
     }
 
