@@ -32,7 +32,7 @@
     </head>
     <body class="hold-transition">
         <div class="wrapper">
-			<div class="box box-primary">
+			<div class="box box-danger">
 
 				<div class="box-header with-border">
 					<h3 class="box-title">通報表單</h3>
@@ -89,7 +89,7 @@
 	                    <p class="help-block">附帶圖檔能讓負責單位更容易了解情況</p>
 					</div>
 					{!! Form::submit('確定通報',array(
-                        'class' => 'btn btn-block btn-primary')) !!}
+                        'class' => 'btn btn-block btn-warning')) !!}
 					{!! Form::close() !!}
 				</div><!-- /.box-body -->
 			</div><!-- /.box -->
